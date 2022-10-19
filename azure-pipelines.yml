@@ -25,3 +25,7 @@ steps:
     Contents: '**/*.json'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
