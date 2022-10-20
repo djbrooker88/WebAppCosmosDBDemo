@@ -10,13 +10,6 @@ pool:
   vmImage: windows-2019
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
 
 - task: CopyFiles@2
   displayName: 'Copy Files'
@@ -26,27 +19,33 @@ steps:
     TargetFolder: '$(build.artifactstagingdirectory)'
 
 - task: DotNetCoreCLI@2
+  displayName: Restore
   inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    feedsToUse: 'select'
+    command: restore
+    projects: '$(Parameters.RestoreBuildProjects)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
+  displayName: Build
   inputs:
-    projects: '**/*.csproj'
+    projects: '$(Parameters.RestoreBuildProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: Test
   inputs:
-    command: 'publish'
-    publishWebProjects: true
+    command: test
+    projects: '$(Parameters.TestProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
 
-- task: PublishBuildArtifacts@1
+- task: DotNetCoreCLI@2
+  displayName: Publish
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-    
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: True
+
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
