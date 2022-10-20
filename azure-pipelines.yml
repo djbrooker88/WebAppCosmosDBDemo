@@ -30,16 +30,23 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
     projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+    
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
