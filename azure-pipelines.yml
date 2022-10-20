@@ -15,7 +15,7 @@ steps:
   displayName: 'Copy Files Arm Templates'
   inputs:
     SourceFolder: '$(build.sourcesdirectory)'
-    Contents: '**/*.json'
+    Contents: '**/webAppCosmosArm.json'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
 - task: PublishBuildArtifacts@1
@@ -26,29 +26,28 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
-    command: restore
-    projects: '$(Parameters.RestoreBuildProjects)'
+    command: 'restore'
+    projects: '**/*.csproj'
+    feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
-    projects: '$(Parameters.RestoreBuildProjects)'
-    arguments: '--configuration $(BuildConfiguration)'
+    command: 'build'
+    projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
-    command: test
-    projects: '$(Parameters.TestProjects)'
-    arguments: '--configuration $(BuildConfiguration)'
+    command: 'test'
+    projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: Publish
   inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: True
+    command: 'publish'
+    publishWebProjects: true
+    arguments: --output $(build.artifactstagingdirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
