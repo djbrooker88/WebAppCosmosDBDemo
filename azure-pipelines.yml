@@ -25,6 +25,11 @@ steps:
     Contents: '**/*.json'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '**/*.csproj'
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
