@@ -48,7 +48,7 @@ steps:
 
     command: restore
 
-    projects: '$(Parameters.RestoreBuildProjects)'
+    projects: '**/*.csproj'
 
 
 
