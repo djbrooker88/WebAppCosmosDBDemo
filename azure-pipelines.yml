@@ -17,11 +17,6 @@ pool:
 variables:
   BuildConfiguration: release
   BuildPlatform: any cpu
-  system.collectionId: ba401604-bbde-4bc6-a45a-c0aec1f5545e
-  system.debug: false
-  system.definitionId: 22
-  system.teamProject: WebAppCosmosDBDemo
-
 
 steps:
 
