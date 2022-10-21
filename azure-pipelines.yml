@@ -58,7 +58,7 @@ steps:
 
   inputs:
 
-    projects: '$(Parameters.RestoreBuildProjects)'
+    projects: '**/*.csproj'
 
     arguments: '--configuration $(BuildConfiguration)'
 
