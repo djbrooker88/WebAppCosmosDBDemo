@@ -12,8 +12,8 @@ steps:
     Contents: '**/webAppCosmosArm.json'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+#- task: PublishBuildArtifacts@1
+#  displayName: 'Publish Artifact: drop'
 
 - task: DotNetCoreCLI@2
   displayName: Restore
