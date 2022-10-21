@@ -72,7 +72,7 @@ steps:
 
     command: test
 
-    projects: '$(Parameters.TestProjects)'
+    projects: '**/*.csproj'
 
     arguments: '--configuration $(BuildConfiguration)'
 
