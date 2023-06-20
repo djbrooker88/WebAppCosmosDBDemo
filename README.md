@@ -1,4 +1,4 @@
----
+----
 page_type: sample
 languages:
 - csharp
@@ -6,7 +6,7 @@ products:
 - aspnet-core
 - azure-cosmos-db
 description: "This sample shows you how to use the Microsoft Azure Cosmos DB service to store and access data from an ASP.NET Core MVC application."
----
+----
 
 # Web application development with ASP.NET Core MVC using Azure Cosmos DB
 
